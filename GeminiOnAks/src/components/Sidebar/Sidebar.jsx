@@ -1,10 +1,13 @@
 import React from 'react'
 import './Sidebar.css'
 import {assets} from '../../assets/assets'
+import {Context} from '../../context/Context'
+
 
 const Sidebar = () => {
 
   const [extended, setExtended] = React.useState(false)
+  const {onSent,prevPrompts,setRecentPrompts} = React.useContext(Context)
 
 
   return (
@@ -18,10 +21,20 @@ const Sidebar = () => {
               {extended ? 
               <div className='recent'>
               <p className="recent-title">Recent</p>
-                <div className="recent-entry">
+
+               {prevPrompts.map( (item,index)=>{
+                return (
+
+                  <div className="recent-entry">
                   <img src={assets.message_icon} alt="" />
-                  <p>What is React</p>
+                  <p>{item}...</p>
                 </div>
+                )
+
+               })}
+               
+
+                
             </div>
             :null
               }
